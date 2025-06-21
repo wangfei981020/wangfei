@@ -1,0 +1,4 @@
+kubectl create secret tls otb1-prod-com-cert \
+  --cert=otb1-prod.com.crt \
+  --key=otb1-prod.com.key \
+  --namespace=istio-system
