@@ -7,10 +7,10 @@ pipeline {
     }
 
     environment {
-        GIT_CRED = '0bac1d39-a01e-4982-9d53-f7d8bfc212e5'
-        ARGOCD_SERVER = "uat-argocd-jenkins.slileisure.com"
-        LARK_WEBHOOK = "https://update-jenkins-k8s-job.slileisure.com/send_lark_card"
-        GITLAB_URL = "gitlab-devops.slileisure.com/argocd/uat-k8s-platform.git"
+        GIT_CRED = 'xxxxxxxxxxxxxxxxxxxxx'
+        ARGOCD_SERVER = "xxx.xxx.com"
+        LARK_WEBHOOK = "https://xxx.xxx.com/send_lark_card"
+        GITLAB_URL = "xxx.com/xx.git"
     }
 
     stages {
