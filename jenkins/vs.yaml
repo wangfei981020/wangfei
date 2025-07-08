@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: jenkins
+  namespace: jenkins
+  annotations:
+    meta.helm.sh/release-name: jenkins
+    meta.helm.sh/release-namespace: jenkins
+  labels:
+    app.kubernetes.io/instance: jenkins
+    app.kubernetes.io/name: jenkins
+spec:
+  gateways:
+    - istio-system/xxx
+  hosts:
+    - uxxx.com
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: jenkins.jenkins.svc.cluster.local
+        port:
+          number: 8080
