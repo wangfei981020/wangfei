@@ -1,0 +1,122 @@
+replicaCount: 1
+
+image:
+  registry: docker.io
+  repository: provectuslabs/kafka-ui
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+#serviceAccount:
+#  create: false
+#  annotations: {}
+#  name: ""
+
+existingConfigMap: ""
+yamlApplicationConfig:
+  kafka:
+    clusters:
+      - name: xxx
+        bootstrapServers: xxx:9094,xxx:9094,xxx:9094
+        readOnly: true
+  auth:
+    type: disabled
+  management:
+    health:
+      ldap:
+        enabled: false
+yamlApplicationConfigConfigMap:
+  {}
+  # keyName: config.yml
+  # name: configMapName
+existingSecret: ""
+envs:
+  secret: {}
+  config: {}
+
+networkPolicy:
+  enabled: false
+  egressRules:
+    customRules: []
+  ingressRules:
+    customRules: []
+
+podAnnotations: {}
+podLabels: {}
+
+annotations: {}
+
+probes:
+  useHttpsScheme: false
+
+podSecurityContext:
+  {}
+
+securityContext:
+  {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+  ingressClassName: ""
+  path: "/"
+  pathType: "Prefix"  
+  host: ""
+  tls:
+    enabled: false
+    secretName: ""
+
+  precedingPaths: []
+
+  succeedingPaths: []
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 2Gi
+  requests:
+    cpu: 500m
+    memory: 1Gi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+- name: AUTH_TYPE
+  value: "LOGIN_FORM"
+- name: SPRING_SECURITY_USER_NAME
+  value: admin
+- name: SPRING_SECURITY_USER_PASSWORD
+  value: hDXr3JbwXy6MG7w
+
+initContainers: {}
+
+volumeMounts: {}
+
+volumes: {}
+
+ingressGateway:
+  enabled: true
+  name: istio-system/xxxx
+  host: xxx.com
+  matchPrefix:
+    - "/"
+  port: 80

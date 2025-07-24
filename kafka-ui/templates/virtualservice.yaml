@@ -1,0 +1,25 @@
+{{- if .Values.ingressGateway.enabled }}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  namespace: {{ .Release.Namespace | quote }}
+  name: {{ include "kafka-ui.fullname" . }}
+  labels:
+    {{- include "kafka-ui.labels" . | nindent 4 }}
+spec:
+  gateways:
+    - {{ .Values.ingressGateway.name | quote }}
+  hosts:
+    - {{ .Values.ingressGateway.host | quote }}
+  http:
+  - match:
+    {{- range .Values.ingressGateway.matchPrefix }}
+    - uri:
+        prefix: {{ . | quote }}
+    {{- end }}
+    route:
+    - destination:
+        host: {{ (print (include "kafka-ui.fullname" .) "." .Release.Namespace ".svc.cluster.local") | quote }}
+        port:
+          number: {{ .Values.ingressGateway.port }}
+{{- end }}
